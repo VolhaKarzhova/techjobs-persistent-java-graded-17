@@ -1,4 +1,24 @@
 package org.launchcode.techjobs.persistent.models;
 
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+@Entity
 public class Employer extends AbstractEntity {
+
+    @NotBlank(message = "Location is required and cannot be blank.")
+    @Size(min = 3, max = 50, message = "Location should be within a range between 3 and 50.")
+    private String location;
+
+    public Employer() {
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }
