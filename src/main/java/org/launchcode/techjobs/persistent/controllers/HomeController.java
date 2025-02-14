@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +39,7 @@ public class HomeController {
 
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
-	model.addAttribute("title", "Add Job");
+        model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
         model.addAttribute("employers", employerRepository.findAll());
         model.addAttribute("skills", skillRepository.findAll());
@@ -49,11 +48,11 @@ public class HomeController {
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                       Errors errors, Model model, @RequestParam int employerId,
+                                    Errors errors, Model model, @RequestParam int employerId,
                                     @RequestParam List<Integer> skills) {
 
         if (errors.hasErrors()) {
-	    model.addAttribute("title", "Add Job");
+            model.addAttribute("title", "Add Job");
             return "add";
         }
 
@@ -71,15 +70,12 @@ public class HomeController {
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
         Optional optionalJob = jobRepository.findById(jobId);
-        if(optionalJob.isPresent()){
+        if (optionalJob.isPresent()) {
             Job job = (Job) optionalJob.get();
             model.addAttribute("job", job);
             return "view";
         } else {
             return "view";
         }
-
-
     }
-
 }

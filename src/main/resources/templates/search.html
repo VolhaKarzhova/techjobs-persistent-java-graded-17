@@ -10,17 +10,17 @@
 
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
-    <form th:action="@{/search/results}" method = "post">
+    <form method="post" th:action="@{/search/results}">
         <h2>Search by:</h2>
 
         <p>
             <span th:each="column : ${columns}">
                 <input
-                        type="radio"
                         name="searchType"
+                        th:checked="${column.key == 'all'}"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        type="radio"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
@@ -28,13 +28,13 @@
 
         <p>
             <label for="searchTerm">Keyword:</label>
-            <input type="text" name="searchTerm" id="searchTerm" />
+            <input id="searchTerm" name="searchTerm" type="text"/>
         </p>
 
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search"/>
     </form>
 
-    <hr />
+    <hr/>
 
     <table class="job-listing">
         <tr th:each="job : ${jobs}">
@@ -50,11 +50,11 @@
                 </p>
                 <p>
                     Skills:
-                    <ul th:each="skill : ${job.skills}">
-                      <li>
-                          <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a>
-                      </li>
-                    </ul>
+                <ul th:each="skill : ${job.skills}">
+                    <li>
+                        <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a>
+                    </li>
+                </ul>
                 </p>
 
             </td>
